@@ -43,15 +43,22 @@ public class MakeCmd {
         //x = ;
         tmp = tmp.replaceAll("version_name", version);
         //x =;
-        tmp = tmp.replaceAll("game_directory", Matcher.quoteReplacement(fgf + GameInfo.GameDir) + fgf);
+        String gamedir = "";
+        if (Config.getConfig("isDuli").equals("true")) {
+            gamedir = fgf + GameInfo.GameDir + tpf + "versions" + tpf + version + fgf;
+        } else {
+            gamedir = fgf + GameInfo.GameDir + fgf;
+        }
+        tmp = tmp.replaceAll("game_directory", Matcher.quoteReplacement(gamedir));
         //  x = ;
         tmp = tmp.replaceAll("game_assets", Matcher.quoteReplacement(GameInfo.GameDir + tpf + "assets" + tpf + "virtual" + tpf + "legacy" + tpf));
         tmp = tmp.replaceAll("assets_root", Matcher.quoteReplacement(fgf + GameInfo.GameDir + tpf + "assets" + fgf));
         tmp = tmp.replaceAll("user_type", "legacy");
         tmp = tmp.replaceAll("user_properties", Matcher.quoteReplacement(GameInfo.twitchToken));
         if (version.length() > 6) {
-            if(version.contains("-"))
-            version = version.substring(0, version.indexOf("-"));
+            if (version.contains("-")) {
+                version = version.substring(0, version.indexOf("-"));
+            }
         }
         tmp = tmp.replaceAll("assets_index_name", version);
         tmp = tmp.replaceAll("auth_access_token", token);
