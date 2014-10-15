@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mclaucherxa;
+package net.ytbolg.mcxa;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -17,8 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.table.DefaultTableModel;
-import static mclaucherxa.ForgeCheck.ReadFile;
-import static mclaucherxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.ForgeCheck.ReadFile;
+import static net.ytbolg.mcxa.GameInfo.tpf;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

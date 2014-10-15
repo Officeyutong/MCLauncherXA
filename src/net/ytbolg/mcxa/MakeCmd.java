@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mclaucherxa;
+package net.ytbolg.mcxa;
 
 import java.util.regex.Matcher;
 import java.util.regex.PatternSyntaxException;
-import static mclaucherxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.GameInfo.tpf;
 //import static mclaucherxa.GameInfo.tpf;
 
 /**

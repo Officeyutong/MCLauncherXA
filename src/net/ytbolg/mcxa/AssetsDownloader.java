@@ -3,41 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mclaucherxa;
+package net.ytbolg.mcxa;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
+import java.util.regex.Matcher;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import static mclaucherxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.GameInfo.tpf;
 //import sun.java2d.opengl.OGLRenderQueue;
 
 /**
  *
  * @author Ytong
  */
-public class Downloader extends javax.swing.JFrame {
+public class AssetsDownloader extends javax.swing.JFrame {
 
-    public void setUnzip(boolean x) {
-        Download.s = x;
+    public static String version = "";
+
+    public void add(String LURL, String RURL, String var, boolean needcopy) {
+        AssetsDownload.LURL.add(RURL);
+        AssetsDownload.RURL.add(LURL.replace(tpf, "/"));
+        AssetsDownload.var.add(var);
+        AssetsDownload.NeedCopy.add(needcopy);
     }
 
-    public void add(String LURL, String RURL) {
-        Download.LURL.add(RURL);
-        Download.RURL.add(LURL.replace(tpf, "/"));
+    public void setVersion(String v) {
+        version = v;
     }
 
     public boolean start() {
-        new Thread(new Download()).start();
+        new Thread(new AssetsDownload()).start();
         //   new Downloader().setVisible(true);
 
         return true;
@@ -46,13 +52,15 @@ public class Downloader extends javax.swing.JFrame {
     /**
      * Creates new form Downloader
      */
-    public Downloader() {
+    public AssetsDownloader() {
         initComponents();
-        Download.LURL = new ArrayList();
-        Download.RURL = new ArrayList();
-        Download.j = jProgressBar1;
-        Download.l = jLabel1;
-        Download.list = jTextArea1;
+        AssetsDownload.LURL = new ArrayList();
+        AssetsDownload.RURL = new ArrayList();
+        AssetsDownload.var = new ArrayList();
+        AssetsDownload.NeedCopy = new ArrayList();
+        AssetsDownload.j = jProgressBar1;
+        AssetsDownload.l = jLabel1;
+        AssetsDownload.list = jTextArea1;
     }
 
     /**
@@ -133,7 +141,7 @@ public class Downloader extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-            setTitle(Lang.getLang("Lib_Title"));   
+        setTitle(Lang.getLang("Lib_Title"));
         jButton1.setText(Lang.getLang("Lib_Button_Cancel"));//    // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
@@ -150,7 +158,7 @@ public class Downloader extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
-class Download implements Runnable {
+class AssetsDownload implements Runnable {
 
     public static boolean s = true;
     public static ArrayList RURL;
@@ -158,35 +166,41 @@ class Download implements Runnable {
     public static JLabel l;
     public static ArrayList LURL;
     public static JTextArea list;
+    public static ArrayList var;
+    public static ArrayList<Boolean> NeedCopy;
 
     //@Override
     @Override
     public void run() {
-        DefaultListModel m = new DefaultListModel();
-        //  list = new JList(m);
+
         //    list.add
-// System.out.println("开始下载" + "http://bmclapi.bangbang93.com/forge/getforge" + "/" + version + "/" + forgeversion);
+        //       System.out.println("开始下载" );
         //  downloadFile("http://bmclapi.bangbang93.com/forge/getforge" + "/" + version + "/" + forgeversion, GameInfo.Rundir + tpf + "forgetmp.jar");
         //   downloadFile("http://bmclapi.bangbang93.com/versions/" + version + "/" + version + ".json", GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".json");
-        if (RURL.size() != LURL.size()) {
-            //     m.add(m.getSize(),);
-            list.setText(list.getText() + "\n" + Lang.getLang("Lib_CountNotEquals"));
-            System.exit(1);
-        }
         for (int i = 0; i < RURL.size(); i++) {
             //  m.add();
-            list.setText(list.getText() + "\n" + "(" + (i + 1) + "/" + (RURL.size()) + ")"+Lang.getLang("Lib_Download") + LURL.get(i));
+            list.setText(list.getText() + "\n" + "(" + (i + 1) + "/" + (RURL.size()) + ")" + Lang.getLang("Lib_Download") + LURL.get(i));
+            list.setCaretPosition(list.getText().length());
             downloadFile(RURL.get(i).toString(), LURL.get(i).toString());
+            if (var.get(i) == null) {
+                continue;
+            }
+            if (NeedCopy.get(i)) {
+                File n = new File(var.get(i).toString().replaceFirst("minecraft/", ""));
+                System.out.println(n);
+                if (!n.getParentFile().exists()) {
+                    n.getParentFile().mkdirs();
+                }
+                fileChannelCopy(new File(LURL.get(i).toString()), n);
+            }
         }
-    //    JOptionPane.showMessageDialog(null, Lang.getLang("Lib_DownloadSucc"));
+        // System.out.println(i);
+  //      JOptionPane.showMessageDialog(null, Lang.getLang("Lib_DownloadSucc") + (RURL.isEmpty() ? Lang.getLang("Assets_NoFileDownloaded") : ""));
 
         j.setValue(0);
         l.setText("");
 
-        if (s) {
-            new Thread(new mclaucherxa.unZipThread()).start();
-        }
-
+        MCLaucherXA.ad.dispose();
 //new Thread(new unZipThread())).start();
         GameInfo.Downok = true;
      //   JOptionPane.showMessageDialog(null, "下载成功,下面将会运行forge安装程序，请在文件选择框里面输入游戏目录（已复制到剪切板）");
@@ -196,6 +210,70 @@ class Download implements Runnable {
 
         // StringSelection selection = new StringSelection(GameInfo.GameDir);//复制step1:生成Transferable 接口对象。剪贴板只能放该类型的对象。 StringSelection类实现了Transferable接口。
         //   clipBoard.setContents(selection, null);//复制step2.第二个参数是Owner。
+    }
+
+    /**
+     *
+     * 使用文件通道的方式复制文件
+     *
+     *
+     *
+     * @param s
+     *
+     * 源文件
+     *
+     * @param t
+     *
+     * 复制到的新文件
+     *
+     */
+
+    public void fileChannelCopy(File s, File t) {
+
+        FileInputStream fi = null;
+
+        FileOutputStream fo = null;
+
+        FileChannel in = null;
+
+        FileChannel out = null;
+
+        try {
+
+            fi = new FileInputStream(s);
+
+            fo = new FileOutputStream(t);
+
+            in = fi.getChannel();//得到对应的文件通道
+
+            out = fo.getChannel();//得到对应的文件通道
+
+            in.transferTo(0, in.size(), out);//连接两个通道，并且从in通道读取，然后写入out通道
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                fi.close();
+
+                in.close();
+
+                fo.close();
+
+                out.close();
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
     }
 
     void downloadFile(String remoteFilePath, String localFilePath) {
@@ -230,14 +308,16 @@ class Download implements Runnable {
             bis.close();
             httpUrl.disconnect();
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+            list.setText(list.getText()+"\n"+e);
+            return;
+          //  e.printStackTrace();
+        } 
             try {
                 bis.close();
                 bos.close();
             } catch (IOException e) {
-                e.printStackTrace();
+               
             }
-        }
+        
     }
 }

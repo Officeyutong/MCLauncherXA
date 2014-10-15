@@ -1,4 +1,4 @@
-package mclaucherxa;
+package net.ytbolg.mcxa;
 
 import java.*;
 //import org.apache.tools.zip.*;
@@ -24,9 +24,9 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import static mclaucherxa.GameInfo.tpf;
-import static mclaucherxa.LauchInfoWindow.jo;
-import static mclaucherxa.LauchInfoWindow.version;
+import static net.ytbolg.mcxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.LauchInfoWindow.jo;
+import static net.ytbolg.mcxa.LauchInfoWindow.version;
 import org.json.JSONException;
 import org.json.JSONObject;
 

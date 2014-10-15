@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mclaucherxa;
+package net.ytbolg.mcxa;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import static mclaucherxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.GameInfo.tpf;
 
 /**
  *

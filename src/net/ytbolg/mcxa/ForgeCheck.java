@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mclaucherxa;
+package net.ytbolg.mcxa;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -26,7 +26,7 @@ import javax.swing.ListSelectionModel;
 import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import static mclaucherxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.GameInfo.tpf;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

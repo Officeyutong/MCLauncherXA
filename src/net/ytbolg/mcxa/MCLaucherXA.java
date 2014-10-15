@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mclaucherxa;
+package net.ytbolg.mcxa;
 
 import java.awt.*;
 import java.awt.HeadlessException;
@@ -42,8 +42,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import static mclaucherxa.ForgeCheck.ReadFile;
-import static mclaucherxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.ForgeCheck.ReadFile;
+import static net.ytbolg.mcxa.GameInfo.tpf;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
