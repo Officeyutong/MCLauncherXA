@@ -1,0 +1,14 @@
+[13:14:01] [main/ERROR]: Can't find the resource index file: assets_root\indexes\1.7.9.json
+[13:14:01] [main/INFO]: Setting user: Ted_Master
+[13:14:01] [main/INFO]: (Session ID is token:auth_access_token:auth_uuid)
+[13:14:02] [Client thread/INFO]: LWJGL Version: 2.9.1
+[13:14:03] [Client thread/INFO]: Reloading ResourceManager: Default, ·½¸ñ¸ÅÄî²ÄÖÊ1.6.zip
+[13:14:04] [Sound Library Loader/INFO]: Sound engine started
+[13:14:04] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[13:14:04] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[13:14:06] [MCO Availability Checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[13:14:06] [MCO Availability Checker #1/ERROR]: Couldn't connect to Realms: Realms (401) 
+[13:14:07] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:gui.button.press
+[13:14:09] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:gui.button.press
+[13:14:11] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:music.menu
+[13:14:12] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:gui.button.press
