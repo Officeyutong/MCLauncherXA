@@ -821,6 +821,7 @@ new About().setVisible(true);        // TODO add your handling code here:
                 Config.setConfig("iszhengban", "false");
                 Config.setConfig("GameDir", GameInfo.GameDir);
                 Config.setConfig("JavaPath", GameInfo.JavaPath);
+                Config.setConfig("isDuli", "false");
                 Config.Save();
 
             } else {
