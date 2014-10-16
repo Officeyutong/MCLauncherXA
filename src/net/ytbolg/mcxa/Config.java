@@ -23,6 +23,39 @@ public class Config {
     static ArrayList rvalue;
     static File CfgFile;
     static Properties p = new Properties();
+    private static String t = "";
+
+    static String getNormalValue(String key) {
+//String r="";
+        switch (key) {
+            case "lastmemory":
+                t = "1500";
+            case "ifclose":
+                t = "true";
+            case "showlauchinfo":
+                t = "true";
+            case "downUrl":
+                t = "https\\://libraries.minecraft.net";
+            case "JavaPath":
+                t = GameInfo.JavaPath;
+            case "username":
+                t = "playerXXX";
+            case "Lang":
+                t = "sChinese.lang";
+            case "lastgameversion":
+                t = "0";
+            case "iszhengban":
+                t = "false";
+            case "GameDir":
+                t = GameInfo.GameDir;
+            case "isDuli":
+                t = "false";
+            case "zhengbanmima":
+                t = "";
+
+        }
+        return t;
+    }
 
     public static void Load(File ConfigFile) throws FileNotFoundException, IOException {
         lvalue = new ArrayList();
@@ -55,9 +88,7 @@ public class Config {
     public static String getConfig(String key) {
 
         if (!lvalue.contains(key)) {
-            if (key.equals("GameDir")) {
-                setConfig(key, GameInfo.GameDir);
-            }
+            setConfig(key, getNormalValue(key));
         }
         return rvalue.get(lvalue.indexOf(key)).toString();
     }
@@ -75,7 +106,7 @@ public class Config {
 
     public static void Save() {
         try {
-            p.store(new FileWriter(CfgFile), "这是MClaucherXA的配置文件");
+            p.store(new FileWriter(CfgFile), "这是MClauncherXA的配置文件");
         } catch (IOException ie) {
         }
     }

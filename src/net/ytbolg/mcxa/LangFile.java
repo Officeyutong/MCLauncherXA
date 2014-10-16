@@ -11,9 +11,9 @@ package net.ytbolg.mcxa;
  */
 public class LangFile {
 
-    public static String Version = "2.4";
-    public static String sChinese = "#这是MCLaucherXA的语言文件\n"
-            + "#This is the language file of the MCLaucherXA\n"
+    public static String Version = "2.4.3.1";
+    public static String sChinese = "#这是MCLauncherXA的语言文件\n"
+            + "#This is the language file of the MCLauncherXA\n"
             + "#请不要随意修改，可能会导致程序错误\n"
             + "#Don't change it,maybe the App will crash because of it\n"
             + "Lang=简体中文\n"
@@ -135,8 +135,8 @@ public class LangFile {
             + "Up_Box_DownSucc=下载完成！新文件:\n"
             + "Up_DownFaild=下载失败！\n";
 
-    public static String tChinese = "#這是MCLaucherXA的語言文件\n"
-            + "#This is the language file of the MCLaucherXA\n"
+    public static String tChinese = "#這是MCLauncherXA的語言文件\n"
+            + "#This is the language file of the MCLauncherXA\n"
             + "#請不要隨意修改，可能會導致程序錯誤\n"
             + "#Don't change it,maybe the App will crash because of it\n"
             + "Lang=繁體中文\n"
@@ -255,8 +255,8 @@ public class LangFile {
             + "Up_Button_Download=下载\n"
             + "Up_Box_DownSucc=下载完成！新文件:\n"
             + "Up_DownFaild=下载失败！\n";
-    public static String english = "#这是MCLaucherXA的语言文件\n"
-            + "#This is the language file of the MCLaucherXA\n"
+    public static String english = "#这是MCLauncherXA的语言文件\n"
+            + "#This is the language file of the MCLauncherXA\n"
             + "#请不要随意修改，可能会导致程序错误\n"
             + "#Don't change it,maybe the App will crash because of it\n"
             + "Lang=English\n"
