@@ -57,7 +57,7 @@ import org.xml.sax.SAXException;
 public class MCLaucherXA extends javax.swing.JFrame {
 
     public static AssetsDownloader ad = new AssetsDownloader();
-    public static final String MainTitle = "MCLaucherXA xxx by officeyutong".replaceAll("xxx", LangFile.Version);
+    public static final String MainTitle = "MCLauncherXA xxx by officeyutong".replaceAll("xxx", LangFile.Version);
     static ConfigFrame c = new ConfigFrame();
 //    static Properties p = new Properties();
     JSONObject vs[];

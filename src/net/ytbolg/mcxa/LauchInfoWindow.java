@@ -113,7 +113,7 @@ public class LauchInfoWindow extends javax.swing.JFrame {
              Runtime.getRuntime().exec("chmod 777 " + tmp[g]);
              }}*/
 //jTextArea1.setText("什么破鸡巴语言4");
-            jTextArea1.setText("MCLaucherXA " + LangFile.Version);
+            jTextArea1.setText("MCLauncherXA " + LangFile.Version);
             msg(Lang.getLang("Lauch_VersionToLauch") + version);
             msg(Lang.getLang("Lauch_UserName") + GameInfo.UserName);
             // msg();
