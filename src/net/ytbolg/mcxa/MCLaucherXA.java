@@ -816,7 +816,7 @@ new About().setVisible(true);        // TODO add your handling code here:
                 Config.setConfig("showlauchinfo", "true");
                 Config.setConfig("ifclose", "true");
                 Config.setConfig("zhengbanmima", "");
-                Config.setConfig("downUrl", "https://libraries.minecraft.net");
+                Config.setConfig("DownSou", "0");
                 Config.setConfig("Lang", "sChinese.lang");
                 Config.setConfig("iszhengban", "false");
                 Config.setConfig("GameDir", GameInfo.GameDir);
@@ -946,7 +946,7 @@ static String getTpf() {
             try {
                 //(HttpURLConnection)  (new URL("http://bmclapi.bangbang93.com/indexes/" + ver + ".json").openConnection()).;
                 //  urlfile = new URL(remoteFilePath);
-                HttpURLConnection httpUrl = (HttpURLConnection) new URL("http://bmclapi.bangbang93.com/indexes/" + ver + ".json").openConnection();
+                HttpURLConnection httpUrl = (HttpURLConnection) new URL(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou")))+"/" + ver + ".json").openConnection();
                 httpUrl.connect();
                 BufferedInputStream bis = new BufferedInputStream(httpUrl.getInputStream());
             } catch (Exception e) {
@@ -954,10 +954,10 @@ static String getTpf() {
             }
             if (!is1_6) {
                 //以下为最新资源文件
-                JSONObject jo = new JSONObject(downloadFile("http://bmclapi.bangbang93.com/indexes/" + ver + ".json")).getJSONObject("objects");
+                JSONObject jo = new JSONObject(downloadFile(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou")))+"/" + ver + ".json")).getJSONObject("objects");
                 System.out.println(ver + jo);
                 JSONArray ja = jo.names();
-                ad.add("http://bmclapi.bangbang93.com/indexes/" + ver + ".json", GameInfo.GameDir + tpf + "assets" + tpf + "indexes" + tpf + ver + ".json", null, false);
+                ad.add(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou")))+"/" + ver + ".json", GameInfo.GameDir + tpf + "assets" + tpf + "indexes" + tpf + ver + ".json", null, false);
                 for (int a = 0; a < ja.length(); a++) {
                     JSONObject jo2 = jo.getJSONObject(ja.getString(a));
                     String hash = jo2.getString("hash");
@@ -970,7 +970,7 @@ static String getTpf() {
                         f.getParentFile().mkdirs();
                     }
 
-                    ad.add("http://bmclapi.bangbang93.com/assets/" + path, GameInfo.GameDir + tpf + "assets" + tpf + "objects" + tpf + path, GameInfo.GameDir + tpf + "assets" + tpf + ja.get(a), true);
+                    ad.add(DownLoadURL.getURL(DownLoadURL.ASSETS, Integer.valueOf(Config.getConfig("DownSou")))+"/" + path, GameInfo.GameDir + tpf + "assets" + tpf + "objects" + tpf + path, GameInfo.GameDir + tpf + "assets" + tpf + ja.get(a), true);
                 }
 
                 ad.start();

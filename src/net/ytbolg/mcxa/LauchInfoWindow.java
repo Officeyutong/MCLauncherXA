@@ -171,7 +171,7 @@ public class LauchInfoWindow extends javax.swing.JFrame {
                 msg(Lang.getLang("Lauch_StratDownload"));
 
                 for (int a = 0; a < GameInfo.NotFoundedLibs.size(); a++) {
-                    d.add(GameInfo.downUrl + GameInfo.NotFoundedLibs.get(a), GameInfo.GameDir + tpf + "libraries" + GameInfo.NotFoundedLibs.get(a));
+                    d.add(DownLoadURL.getURL(DownLoadURL.LIBRARIES,Integer.valueOf(Config.getConfig("DownSou"))) + GameInfo.NotFoundedLibs.get(a), GameInfo.GameDir + tpf + "libraries" + GameInfo.NotFoundedLibs.get(a));
                     /*                    msg("下载第" + (a + 1) + "个缺失库文件:" + GameInfo.NotFoundedLibs.get(a));
                      String ab = GameInfo.downUrl + GameInfo.NotFoundedLibs.get(a);
                      ab = ab.replace(tpf, "/");

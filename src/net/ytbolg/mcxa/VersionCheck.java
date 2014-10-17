@@ -245,7 +245,7 @@ public class VersionCheck extends javax.swing.JFrame {
         jTabbedPane1.setTitleAt(2, Lang.getLang("Version_TabledPanel_jbb"));
         jTabbedPane1.setTitleAt(3, Lang.getLang("Version_TabledPanel_qb"));
         try {
-            JSONArray ja = (new JSONObject(downloadFile("http://bmclapi.bangbang93.com/versions/versions.json")).getJSONArray("versions"));
+            JSONArray ja = (new JSONObject(downloadFile(DownLoadURL.getURL(DownLoadURL.VERSION_LIST, Integer.valueOf(Config.getConfig("DownSou"))))).getJSONArray("versions"));
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
                 if (jo.getString("type").equals("release")) {
@@ -333,8 +333,8 @@ class DownVersionThread implements Runnable {
     @Override
     public void run() {
         System.out.println("开始下载");
-        downloadFile("http://bmclapi.bangbang93.com/versions/" + version + "/" + version + ".jar", GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".jar");
-        downloadFile("http://bmclapi.bangbang93.com/versions/" + version + "/" + version + ".json", GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".json");
+        downloadFile(DownLoadURL.getURL(DownLoadURL.VERSION, Integer.valueOf(Config.getConfig("DownSou")))+"/" + version + "/" + version + ".jar", GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".jar");
+        downloadFile(DownLoadURL.getURL(DownLoadURL.VERSION, Integer.valueOf(Config.getConfig("DownSou")))+"/" + version + "/" + version + ".json", GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".json");
         JOptionPane.showMessageDialog(null, Lang.getLang("Version_DownSucc"));
         j.setValue(0);
         l.setText("");
