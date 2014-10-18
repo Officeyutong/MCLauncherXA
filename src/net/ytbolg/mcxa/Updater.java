@@ -5,6 +5,7 @@
  */
 package net.ytbolg.mcxa;
 
+import net.ytbolg.mcxa.Launcher.GameInfo;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -22,7 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
-import static net.ytbolg.mcxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
 import static net.ytbolg.mcxa.MCLaucherXA.ReadFile;
 import org.json.JSONException;
 import org.json.JSONObject;

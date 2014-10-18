@@ -5,6 +5,7 @@
  */
 package net.ytbolg.mcxa;
 
+import net.ytbolg.mcxa.Launcher.GameInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

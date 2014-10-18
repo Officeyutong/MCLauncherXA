@@ -11,7 +11,7 @@ package net.ytbolg.mcxa;
  */
 public class LangFile {
 
-    public static String Version = "2.4.3.1";
+    public static String Version = "2.5";
     public static String sChinese = "#这是MCLauncherXA的语言文件\n"
             + "#This is the language file of the MCLauncherXA\n"
             + "#请不要随意修改，可能会导致程序错误\n"
@@ -80,7 +80,7 @@ public class LangFile {
             + "Set_Button_Cancel=取消\n"
             + "Set_Button_SaveAndClose=保存并关闭\n"
             + "Set_Label_Lang=选择语言:\n"
-            + "Set_Label_LibUrl=库文件下载地址\n"
+            + "Set_Label_LibUrl=下载源\n"
             + "Set_Label_Warning=注：语言更改将在重启后生效\n"
             + "Set_Label_Minecraft=游戏文件夹位置\n"
             + "Set_Label_Javapath=Java目录\n"
@@ -203,7 +203,7 @@ public class LangFile {
             + "Set_Button_Cancel=取消\n"
             + "Set_Button_SaveAndClose=保存並關閉\n"
             + "Set_Label_Lang=選擇語言:\n"
-            + "Set_Label_LibUrl=庫文件下載地址\n"
+            + "Set_Label_LibUrl=下载源\n"
             + "Set_Label_Warning=注：語言更改將在重啓後生效\n"
             + "Set_Label_Minecraft=游戏文件夹位置\n"
             + "Set_Label_Javapath=Java目录\n"
@@ -323,7 +323,7 @@ public class LangFile {
             + "Set_Button_Cancel=Cancel\n"
             + "Set_Button_SaveAndClose=Save and close\n"
             + "Set_Label_Lang=Choose the language:\n"
-            + "Set_Label_LibUrl=Select the library file download address\n"
+            + "Set_Label_LibUrl=Download from\n"
             + "Set_Label_Warning=Note：Language changes will take effect after restart\n"
             + "Set_Label_Minecraft=Game Path\n"
             + "Set_Label_Javapath=Java Path\n"

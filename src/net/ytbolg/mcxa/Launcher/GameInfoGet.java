@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.ytbolg.mcxa;
+package net.ytbolg.mcxa.Launcher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import static net.ytbolg.mcxa.GameInfo.tpf;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

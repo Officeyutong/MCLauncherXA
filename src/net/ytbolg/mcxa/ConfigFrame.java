@@ -17,7 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import static net.ytbolg.mcxa.GameInfo.tpf;
+import net.ytbolg.mcxa.Launcher.GameInfo;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
+//import javax.swing.JLauncher.OptionPane;
+//import static net.ytbolg.mcxa.GameInfo.tpf;
 
 /**
  *

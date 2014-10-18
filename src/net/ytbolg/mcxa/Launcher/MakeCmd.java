@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.ytbolg.mcxa;
+package net.ytbolg.mcxa.Launcher;
 
 import java.util.regex.Matcher;
 import java.util.regex.PatternSyntaxException;
-import static net.ytbolg.mcxa.GameInfo.tpf;
+import net.ytbolg.mcxa.Config;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
 //import static mclaucherxa.GameInfo.tpf;
 
 /**
@@ -30,7 +31,7 @@ public class MakeCmd {
         return t;
     }
 
-    public static String ReplaceArgs(String args, String username, String version, String token) throws PatternSyntaxException {
+    public static String ReplaceArgs(String args, String username, String version, String token,String twitchToken) throws PatternSyntaxException {
         String tpf = GameInfo.tpf;
         //String x = "";
         String fgf = System.getProperty("os.name").contains("Linux") ? "'" : "\"";
@@ -54,7 +55,7 @@ public class MakeCmd {
         tmp = tmp.replaceAll("game_assets", Matcher.quoteReplacement(GameInfo.GameDir + tpf + "assets" + tpf + "virtual" + tpf + "legacy" + tpf));
         tmp = tmp.replaceAll("assets_root", Matcher.quoteReplacement(fgf + GameInfo.GameDir + tpf + "assets" + fgf));
         tmp = tmp.replaceAll("user_type", "legacy");
-        tmp = tmp.replaceAll("user_properties", Matcher.quoteReplacement(GameInfo.twitchToken));
+        tmp = tmp.replaceAll("user_properties", Matcher.quoteReplacement(twitchToken));
         if (version.length() > 6) {
             if (version.contains("-")) {
                 version = version.substring(0, version.indexOf("-"));

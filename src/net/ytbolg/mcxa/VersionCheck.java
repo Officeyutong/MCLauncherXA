@@ -17,8 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.table.DefaultTableModel;
-import static net.ytbolg.mcxa.ForgeCheck.ReadFile;
-import static net.ytbolg.mcxa.GameInfo.tpf;
+import net.ytbolg.mcxa.Launcher.GameInfo;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
+import static net.ytbolg.mcxa.MCLaucherXA.ReadFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

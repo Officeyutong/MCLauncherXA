@@ -18,7 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import static net.ytbolg.mcxa.GameInfo.tpf;
+import net.ytbolg.mcxa.Launcher.GameInfo;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
+//import javax.swingLauncher..JTextArea;
+//import static net.ytbolg.mcxa.GameInfo.tpf;
 //import sun.java2d.opengl.OGLRenderQueue;
 
 /**

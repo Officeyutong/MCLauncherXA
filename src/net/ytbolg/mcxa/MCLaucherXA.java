@@ -42,8 +42,13 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+//iLauncher.mport javax.xml.parsers.ParserConfigurationException;
 import static net.ytbolg.mcxa.ForgeCheck.ReadFile;
-import static net.ytbolg.mcxa.GameInfo.tpf;
+//import static net.ytbolg.mcxa.GameInfo.tpf;
+import net.ytbolg.mcxa.Launcher.GameInfo;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
+import net.ytbolg.mcxa.Launcher.GameInfoGet;
+import net.ytbolg.mcxa.Launcher.YggdrasilCheck;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -607,8 +612,12 @@ public class MCLaucherXA extends javax.swing.JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 GameInfo.assVersion = jList1.getSelectedValue().toString();
-                GetAss();
-                //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+                    GetAss();
+                    //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                } catch (ParserConfigurationException ex) {
+                    Logger.getLogger(MCLaucherXA.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             @Override
@@ -816,7 +825,7 @@ new About().setVisible(true);        // TODO add your handling code here:
                 Config.setConfig("showlauchinfo", "true");
                 Config.setConfig("ifclose", "true");
                 Config.setConfig("zhengbanmima", "");
-                Config.setConfig("DownSou", "0");
+                Config.setConfig("DownSou", "1");
                 Config.setConfig("Lang", "sChinese.lang");
                 Config.setConfig("iszhengban", "false");
                 Config.setConfig("GameDir", GameInfo.GameDir);
@@ -928,7 +937,7 @@ static String getTpf() {
         return String.valueOf(c);
     }
 
-    static void GetAss() {
+    static void GetAss() throws ParserConfigurationException {
         //  System.out.println("Getting Ass");
         String ver;
 

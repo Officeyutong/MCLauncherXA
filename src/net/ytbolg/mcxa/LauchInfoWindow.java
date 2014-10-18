@@ -21,12 +21,14 @@ import java.util.Iterator;
 import java.util.regex.PatternSyntaxException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import static net.ytbolg.mcxa.GameInfo.tpf;
 import static net.ytbolg.mcxa.LauchInfoWindow.jo;
 import static net.ytbolg.mcxa.LauchInfoWindow.version;
+import net.ytbolg.mcxa.Launcher.GameInfo;
+import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
+import net.ytbolg.mcxa.Launcher.GameInfoGet;
+import net.ytbolg.mcxa.Launcher.MakeCmd;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -363,7 +365,7 @@ class unZipThread implements Runnable {
             if (GameInfo.token.equals("")) {
                 GameInfo.token = "auth_access_token";
             }
-            String args = MakeCmd.ReplaceArgs(LauchInfoWindow.jo.getString("minecraftArguments"), GameInfo.UserName, version, GameInfo.token);
+            String args = MakeCmd.ReplaceArgs(LauchInfoWindow.jo.getString("minecraftArguments"), GameInfo.UserName, version, GameInfo.token,GameInfo.twitchToken);
             //      System.out.println(args);
 
             msg(Lang.getLang("Lauch_ForStarting"));
