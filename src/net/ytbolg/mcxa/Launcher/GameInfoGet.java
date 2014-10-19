@@ -52,9 +52,9 @@ public class GameInfoGet {
         return b && f;
     }
 
-    public static ArrayList getLibs(String version, String dir) throws FileNotFoundException, IOException, JSONException {
+    public static ArrayList getLibs(String version) throws FileNotFoundException, IOException, JSONException {
      //   System.out.println("什么破鸡巴语言4");//   System.out.println("getLibs");
-        File file = new File(dir + tpf + "versions" + tpf + version + tpf + version + ".json");
+        File file = new File(GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".json");
         FileReader r = new FileReader(file);
         char c[] = new char[(int) file.length()];
         r.read(c);
@@ -81,11 +81,11 @@ public class GameInfoGet {
         return al;
     }
 
-    public static String libstotruedir(ArrayList l, String dir) throws JSONException, IOException {
+    public static String libstotruedir(ArrayList l) throws JSONException, IOException {
        // System.out.println("什么破鸡巴语言5");    //  System.out.println("start libs to true dir");
         GameInfo.NotFoundedLibs = new ArrayList();
         GameInfo.unzipAbledLibs = new ArrayList();
-        String tmp = dir + tpf + "libraries";
+        String tmp = GameInfo.GameDir + tpf + "libraries";
         ArrayList temp = (ArrayList) l.clone();
         String a = "";
         //  System.out.println(getSys());
@@ -154,7 +154,7 @@ public class GameInfoGet {
             cd = cd.replace("{", "");
             cd = cd.replace("}", "");
             cd = cd.replaceAll("arch", System.getProperty("sun.arch.data.model"));
-            if (new File(dir + tpf + "libraries" + tpf + c + tpf + cd).exists() == false) {
+            if (new File(GameInfo.GameDir + tpf + "libraries" + tpf + c + tpf + cd).exists() == false) {
 
                 if (cd.contains("nightly")) {
                     continue;
@@ -166,7 +166,7 @@ public class GameInfoGet {
                 //    System.out.println(GameInfo.NotFoundedLibs.isEmpty());
             }
             if (Native.equals("") == false) {
-                GameInfo.unzipAbledLibs.add(dir + tpf + "libraries" + tpf + c + tpf + cd);
+                GameInfo.unzipAbledLibs.add(GameInfo.GameDir + tpf + "libraries" + tpf + c + tpf + cd);
                 continue;
             }
 
@@ -178,8 +178,11 @@ public class GameInfoGet {
               h="'";
                 j = ":";
             }
-            a = a + h + dir + tpf + "libraries" + tpf + c + tpf + cd + h + j;
-            //  c=c.replaceAll(tpf+tpf, tpf);
+           // System.out.println(tpf);
+        //    a=a.replace(tpf+tpf, tpf);
+         //   System.out.println( h + GameInfo.GameDir + tpf + "libraries" + tpf + c + tpf + cd + h + j);
+            a = a + h + GameInfo.GameDir + tpf + "libraries" + tpf + c + tpf + cd + h + j;
+              
         }
 
         return a;

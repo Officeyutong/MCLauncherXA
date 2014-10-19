@@ -647,7 +647,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
                 try {
                     Downloader d = new Downloader();
                     d.setUnzip(false);
-                    String al = GameInfoGet.libstotruedir(GameInfoGet.getLibs(jList1.getSelectedValue().toString(), GameInfo.GameDir), GameInfo.GameDir);
+                    String al = GameInfoGet.libstotruedir(GameInfoGet.getLibs(jList1.getSelectedValue().toString()));
                     String libs[] = al.split(";");
                     for (int a = 0; a < libs.length; a++) {
                         libs[a] = libs[a].substring(1, libs[a].length() - 1);
@@ -657,7 +657,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
                         if (f.exists()) {
                             f.delete();
                         }
-                        d.add(GameInfo.downUrl + lib.replaceFirst(Matcher.quoteReplacement(GameInfo.GameDir + tpf + "libraries"), ""), lib);
+                        d.add(DownLoadURL.getURL(DownLoadURL.LIBRARIES, Integer.valueOf(Config.getConfig("DownSou"))) + lib.replaceFirst(Matcher.quoteReplacement(GameInfo.GameDir + tpf + "libraries"), ""), lib);
                     }
                     d.setVisible(true);
                     d.start();
@@ -722,8 +722,9 @@ public class MCLaucherXA extends javax.swing.JFrame {
                 i = 0;
             }
             jList1.setSelectedIndex(i);
-            if(jList1.getModel().getSize()!=0)
-            BrushLabels(jList1.getSelectedIndex());
+            if (jList1.getModel().getSize() != 0) {
+                BrushLabels(jList1.getSelectedIndex());
+            }
             OutputStream in = new FileOutputStream(GameInfo.Rundir + tpf + "MCXA.cfg");
             Config.Save();
 // p.store(in, "= =");
@@ -743,7 +744,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-new About().setVisible(true);        // TODO add your handling code here:
+        new About().setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
@@ -753,17 +754,21 @@ new About().setVisible(true);        // TODO add your handling code here:
     public static void main(String args[]) throws InterruptedException {
 //System.out.println(System.getProperty("os.name"));
 //Test.main(null);
+        System.out.println(System.getProperty("os.arch"));
         //  System.getProperties().list(System.out);
         try {
-            File f2 = new File(new File(".").getCanonicalPath()  + "/update.note");
-           System.out.println(f2.exists()+f2.toString());
+            String tx=new File(".").getCanonicalPath();
+            if(tx.endsWith("\\"))
+                tx=tx.substring(0,tx.length()-1);
+            File f2 = new File(tx + "/update.note");
+            System.out.println(f2.exists() + f2.toString());
             if (f2.exists()) {
-        //        Thread.sleep(3000);
-                String x=ReadFile(f2.toString());
+                //        Thread.sleep(3000);
+                String x = ReadFile(f2.toString());
                 System.out.println(x);
-                f2.delete();
+                f2.deleteOnExit();
                 new File(x).delete();
-                
+
             }
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             //      Test t = new Test("H:\\mclaucherxa\\");
@@ -773,15 +778,20 @@ new About().setVisible(true);        // TODO add your handling code here:
             String fgf = System.getProperty("os.name").contains("Linux") ? "'" : "\"";
             if (!System.getProperty("os.name").contains("Windows")) {
                 //       GameInfo.JavaPath = "java";
-                GameInfo.JavaPath =  System.getProperty("java.home") + tpf + "bin" + tpf + "java" ;
+                GameInfo.JavaPath = System.getProperty("java.home") + tpf + "bin" + tpf + "java";
             } else {
                 //  GameInfo.JavaPath = "java";
-                GameInfo.JavaPath =  System.getProperty("java.home") + tpf + "bin" + tpf + "java.exe" ;
+                GameInfo.JavaPath = System.getProperty("java.home") + tpf + "bin" + tpf + "java.exe";
             }
             //  GameInfo.GameDir = "J:\\NewZM\\client\\.minecraft";
             //   GameInfoGet.getGameVersions();
-            GameInfo.GameDir = new File(".").getCanonicalPath() + GameInfo.tpf + ".minecraft";
             GameInfo.Rundir = new File(".").getCanonicalPath();
+            System.out.println(GameInfo.Rundir);
+            if ( GameInfo.Rundir.endsWith("\\")) {
+                GameInfo.Rundir = GameInfo.Rundir.substring(0, GameInfo.Rundir.length() - 1);
+            }
+            System.out.println(GameInfo.Rundir);
+            GameInfo.GameDir = GameInfo.Rundir + GameInfo.tpf + ".minecraft";
 
             //下面是创建配置
             String Files[] = {"sChinese.lang", "tChinese.lang", "English.lang"};
@@ -956,19 +966,19 @@ static String getTpf() {
             try {
                 //(HttpURLConnection)  (new URL("http://bmclapi.bangbang93.com/indexes/" + ver + ".json").openConnection()).;
                 //  urlfile = new URL(remoteFilePath);
-                HttpURLConnection httpUrl = (HttpURLConnection) new URL(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou")))+"/" + ver + ".json").openConnection();
+                HttpURLConnection httpUrl = (HttpURLConnection) new URL(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou"))) + "/" + ver + ".json").openConnection();
                 httpUrl.connect();
                 BufferedInputStream bis = new BufferedInputStream(httpUrl.getInputStream());
             } catch (Exception e) {
-                ver="1.7.4";
+                ver = "1.7.4";
                 is1_6 = true;
             }
             if (true) {
                 //以下为最新资源文件
-                JSONObject jo = new JSONObject(downloadFile(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou")))+"/" + ver + ".json")).getJSONObject("objects");
+                JSONObject jo = new JSONObject(downloadFile(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou"))) + "/" + ver + ".json")).getJSONObject("objects");
                 System.out.println(ver + jo);
                 JSONArray ja = jo.names();
-                ad.add(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou")))+"/" + ver + ".json", GameInfo.GameDir + tpf + "assets" + tpf + "indexes" + tpf + ver + ".json", null, false);
+                ad.add(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou"))) + "/" + ver + ".json", GameInfo.GameDir + tpf + "assets" + tpf + "indexes" + tpf + ver + ".json", null, false);
                 for (int a = 0; a < ja.length(); a++) {
                     JSONObject jo2 = jo.getJSONObject(ja.getString(a));
                     String hash = jo2.getString("hash");
@@ -981,12 +991,12 @@ static String getTpf() {
                         f.getParentFile().mkdirs();
                     }
 
-                    ad.add(DownLoadURL.getURL(DownLoadURL.ASSETS, Integer.valueOf(Config.getConfig("DownSou")))+"/" + path, GameInfo.GameDir + tpf + "assets" + tpf + "objects" + tpf + path, GameInfo.GameDir + tpf + "assets" + tpf + ja.get(a), true);
+                    ad.add(DownLoadURL.getURL(DownLoadURL.ASSETS, Integer.valueOf(Config.getConfig("DownSou"))) + "/" + path, GameInfo.GameDir + tpf + "assets" + tpf + "objects" + tpf + path, GameInfo.GameDir + tpf + "assets" + tpf + ja.get(a), true);
                 }
 
                 ad.start();
                 ad.setVisible(true);
-            } else if(false) {
+            } else if (false) {
                 HttpURLConnection h = (HttpURLConnection) new URL("http://www.bangbang93.com/bmcl/resources/").openConnection();
                 InputStream is = h.getInputStream();
                 Document d = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
@@ -1103,7 +1113,7 @@ static String getTpf() {
             }
         }
         String x = ReadFile(GameInfo.Rundir + GameInfo.tpf + "temp.tmp");
-        f.delete();
+        f.deleteOnExit();
         return x;
     }
 

@@ -19,7 +19,7 @@ public class MakeCmd {
 
     public static String MakeCmd(String libs, String args, String memory, String version, String mainclass) {
         //   System.out.println("Making cmd");
-        String tpf = GameInfo.tpf;
+       // GameInfo.tpf;
         String t = "";
         String fgf = System.getProperty("os.name").contains("Linux") ? "'" : "\"";
         t = " -Xmx" + memory + " "/*" -Dfml.ignorePatchDiscrepancies=true*/ + "-Djava.library.path=" + fgf + GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + "Natives" + fgf + " -classpath " + libs + fgf + GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".jar" + fgf + " ";

@@ -107,7 +107,8 @@ public class LauchInfoWindow extends javax.swing.JFrame {
             // jTextArea1.setText("什么破鸡巴语言3");
             //  System.out.println(jList1.getSelectedValue().toString());
             //    String version = MCLaucherXA.jList1.getSelectedValue().toString();
-            lib = GameInfoGet.libstotruedir(GameInfoGet.getLibs(version, GameInfo.GameDir), GameInfo.GameDir);
+
+            lib = GameInfoGet.libstotruedir(GameInfoGet.getLibs(version));
             /*  if (System.getProperty("os.name").contains("Linux")||System.getProperty("os.name").contains("Mac")) {
              msg("检测到运行非Win系统，正在加权限");
              String tmp[] = lib.split(";");

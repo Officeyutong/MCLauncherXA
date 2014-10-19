@@ -293,7 +293,8 @@ class Do implements Runnable {
             FileWriter fw = new FileWriter(f2);
             fw.write(System.getProperty("java.class.path"));
             fw.close();
-            Runtime.getRuntime().exec(GameInfo.JavaPath+" -jar "+GameInfo.Rundir + tpf + "MCLaucherXA" + Updater.ver + ".jar");
+            String fgf=System.getProperty("os.name").equals("Windows")?"\"":"'";
+            Runtime.getRuntime().exec(fgf+GameInfo.JavaPath+fgf+" -jar "+GameInfo.Rundir + tpf + "MCLaucherXA" + Updater.ver + ".jar");
             System.exit(0);
             //      new File(System.getProperty("java.class.path")).deleteOnExit();
         } catch (Exception ex) {
