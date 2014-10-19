@@ -52,7 +52,7 @@ public class MakeCmd {
         }
         tmp = tmp.replaceAll("game_directory", Matcher.quoteReplacement(gamedir));
         //  x = ;
-        tmp = tmp.replaceAll("game_assets", Matcher.quoteReplacement(GameInfo.GameDir + tpf + "assets" + tpf + "virtual" + tpf + "legacy" + tpf));
+        tmp = tmp.replaceAll("game_assets", Matcher.quoteReplacement(fgf + GameInfo.GameDir + tpf + "assets" + fgf));
         tmp = tmp.replaceAll("assets_root", Matcher.quoteReplacement(fgf + GameInfo.GameDir + tpf + "assets" + fgf));
         tmp = tmp.replaceAll("user_type", "legacy");
         tmp = tmp.replaceAll("user_properties", Matcher.quoteReplacement(twitchToken));

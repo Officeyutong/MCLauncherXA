@@ -31,28 +31,41 @@ public class Config {
         switch (key) {
             case "lastmemory":
                 t = "1500";
+                break;
             case "ifclose":
                 t = "true";
+                break;
             case "showlauchinfo":
                 t = "true";
-            case "downUrl":
-                t = "https\\://libraries.minecraft.net";
+                break;
+
             case "JavaPath":
                 t = GameInfo.JavaPath;
+                break;
             case "username":
                 t = "playerXXX";
+                break;
             case "Lang":
                 t = "sChinese.lang";
+                break;
             case "lastgameversion":
                 t = "0";
+                break;
             case "iszhengban":
                 t = "false";
+                break;
             case "GameDir":
                 t = GameInfo.GameDir;
+                break;
             case "isDuli":
                 t = "false";
+                break;
             case "zhengbanmima":
                 t = "";
+                break;
+            case "DownSou":
+                t = "1";
+                break;
 
         }
         return t;
@@ -109,6 +122,7 @@ public class Config {
         try {
             p.store(new FileWriter(CfgFile), "这是MClauncherXA的配置文件");
         } catch (IOException ie) {
+            ie.printStackTrace();
         }
     }
 }

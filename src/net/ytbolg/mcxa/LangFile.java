@@ -11,7 +11,7 @@ package net.ytbolg.mcxa;
  */
 public class LangFile {
 
-    public static String Version = "2.5";
+    public static String Version = "2.5.2";
     public static String sChinese = "#这是MCLauncherXA的语言文件\n"
             + "#This is the language file of the MCLauncherXA\n"
             + "#请不要随意修改，可能会导致程序错误\n"

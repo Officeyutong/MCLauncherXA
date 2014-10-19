@@ -722,6 +722,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
                 i = 0;
             }
             jList1.setSelectedIndex(i);
+            if(jList1.getModel().getSize()!=0)
             BrushLabels(jList1.getSelectedIndex());
             OutputStream in = new FileOutputStream(GameInfo.Rundir + tpf + "MCXA.cfg");
             Config.Save();
@@ -959,9 +960,10 @@ static String getTpf() {
                 httpUrl.connect();
                 BufferedInputStream bis = new BufferedInputStream(httpUrl.getInputStream());
             } catch (Exception e) {
+                ver="1.7.4";
                 is1_6 = true;
             }
-            if (!is1_6) {
+            if (true) {
                 //以下为最新资源文件
                 JSONObject jo = new JSONObject(downloadFile(DownLoadURL.getURL(DownLoadURL.INDEXES, Integer.valueOf(Config.getConfig("DownSou")))+"/" + ver + ".json")).getJSONObject("objects");
                 System.out.println(ver + jo);
@@ -984,7 +986,7 @@ static String getTpf() {
 
                 ad.start();
                 ad.setVisible(true);
-            } else {
+            } else if(false) {
                 HttpURLConnection h = (HttpURLConnection) new URL("http://www.bangbang93.com/bmcl/resources/").openConnection();
                 InputStream is = h.getInputStream();
                 Document d = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
@@ -1003,7 +1005,7 @@ static String getTpf() {
                     String f = (nal.get(i).getChildNodes().item(0).getChildNodes().item(0).getNodeValue());
                     String md5 = nal.get(i).getChildNodes().item(2).getChildNodes().item(0).getNodeValue();
                     //    ps.println(md5);
-                    if (!f.endsWith(".ogg")) {
+                    if (!f.contains(".")) {
                         continue;
                     }
                     if (!new File(GameInfo.GameDir + tpf + "assets" + tpf + "virtual" + tpf + "legacy" + tpf + f).exists()) {

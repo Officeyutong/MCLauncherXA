@@ -16,7 +16,7 @@ public class DownLoadURL {
     private static final String indexes[] = new String[]{"https://s3.amazonaws.com/Minecraft.Download/indexes", "http://bmclapi.bangbang93.com/indexes"};
     private static final String versionlist[] = new String[]{"https://s3.amazonaws.com/Minecraft.Download/versions/versions.json", "http://bmclapi.bangbang93.com/mcversions/versions.json"};
     private static final String optifine[] = new String[]{"http://optifine.net/downloads.php", "http://bmclapi.bangbang93.com/optifine/versionlist"};
-    private static final String assets[] = new String[]{"http://resources.download.minecraft.net", "http://bmclapi.bangbang93.com/assets/"};
+    private static final String assets[] = new String[]{"http://resources.download.minecraft.net", "http://bmclapi.bangbang93.com/assets"};
     public final static int VERSION = 0;
     public final static int LIBRARIES = 1;
     public final static int INDEXES = 2;
