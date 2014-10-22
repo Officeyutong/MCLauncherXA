@@ -370,7 +370,9 @@ class unZipThread implements Runnable {
             //      System.out.println(args);
 
             msg(Lang.getLang("Lauch_ForStarting"));
-            String cmd = MakeCmd.MakeCmd(LauchInfoWindow.lib, args, GameInfo.memory + "M", version, jo.getString("mainClass"));
+            String apparg=GameInfo.lauchArg;
+
+            String cmd = MakeCmd.MakeCmd(LauchInfoWindow.lib, args, GameInfo.memory + "M", version, jo.getString("mainClass"),apparg);
             //    msg(jo.getString("minecraftArguments"));
             //  msg(cmd);
 

@@ -5,8 +5,12 @@
  */
 package net.ytbolg.mcxa.Launcher;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.PatternSyntaxException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import net.ytbolg.mcxa.Config;
 import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
 //import static mclaucherxa.GameInfo.tpf;
@@ -17,12 +21,26 @@ import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
  */
 public class MakeCmd {
 
-    public static String MakeCmd(String libs, String args, String memory, String version, String mainclass) {
+    public static boolean isChanged(ZipFile zf) {
+        System.out.println(zf.getName());
+        Enumeration a = zf.entries();
+       // ArrayList ab=new ArrayList(a);
+        boolean b=true;
+        while(a.hasMoreElements()){
+          //  System.out.println(((ZipEntry)a.nextElement()).getName());
+        if(((ZipEntry)a.nextElement()).getName().contains("META-INF"))
+          b=false;
+        }
+      System.out.println(b);
+        return b;
+    }
+
+    public static String MakeCmd(String libs, String args, String memory, String version, String mainclass,String appenArgs) {
         //   System.out.println("Making cmd");
-       // GameInfo.tpf;
+        // GameInfo.tpf;
         String t = "";
         String fgf = System.getProperty("os.name").contains("Linux") ? "'" : "\"";
-        t = " -Xmx" + memory + " "/*" -Dfml.ignorePatchDiscrepancies=true*/ + "-Djava.library.path=" + fgf + GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + "Natives" + fgf + " -classpath " + libs + fgf + GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".jar" + fgf + " ";
+        t = " -Xmx" + memory + " "/*" -Dfml.ignorePatchDiscrepancies=true*/ +appenArgs+ " -Djava.library.path=" + fgf + GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + "Natives" + fgf + " -classpath " + libs + fgf + GameInfo.GameDir + tpf + "versions" + tpf + version + tpf + version + ".jar" + fgf + " ";
         //   System.out.println("Making Ok");
         t = t + mainclass + " ";
         t = t + args;
@@ -31,7 +49,7 @@ public class MakeCmd {
         return t;
     }
 
-    public static String ReplaceArgs(String args, String username, String version, String token,String twitchToken) throws PatternSyntaxException {
+    public static String ReplaceArgs(String args, String username, String version, String token, String twitchToken) throws PatternSyntaxException {
         String tpf = GameInfo.tpf;
         //String x = "";
         String fgf = System.getProperty("os.name").contains("Linux") ? "'" : "\"";

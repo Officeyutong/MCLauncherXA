@@ -80,6 +80,7 @@ public class Updater extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel3.setText("升级说明：");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("微软雅黑", 0, 13)); // NOI18N
         jTextArea1.setRows(5);

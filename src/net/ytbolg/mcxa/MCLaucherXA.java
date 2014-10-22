@@ -5,7 +5,6 @@
  */
 package net.ytbolg.mcxa;
 
-import java.awt.*;
 import java.awt.HeadlessException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -21,12 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.StringWriter;
 import java.lang.System;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -35,7 +30,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
-import javax.imageio.ImageIO;
+import java.util.zip.ZipFile;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -43,11 +38,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 //iLauncher.mport javax.xml.parsers.ParserConfigurationException;
-import static net.ytbolg.mcxa.ForgeCheck.ReadFile;
 //import static net.ytbolg.mcxa.GameInfo.tpf;
 import net.ytbolg.mcxa.Launcher.GameInfo;
 import static net.ytbolg.mcxa.Launcher.GameInfo.tpf;
 import net.ytbolg.mcxa.Launcher.GameInfoGet;
+import net.ytbolg.mcxa.Launcher.MakeCmd;
 import net.ytbolg.mcxa.Launcher.YggdrasilCheck;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,6 +87,9 @@ public class MCLaucherXA extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         fbbq = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -99,7 +97,6 @@ public class MCLaucherXA extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -147,23 +144,50 @@ public class MCLaucherXA extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel6.setText("注：本启动器使用了BMCLVAPI!");
 
+        jLabel9.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jLabel9.setText("启动参数");
+
+        jComboBox1.setEditable(true);
+        jComboBox1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true" }));
+        jComboBox1.setSelectedIndex(-1);
+
+        jButton1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
+        jButton1.setText("启动");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lxbq))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fbbq))
-                    .addComponent(jLabel6))
-                .addGap(94, 94, 94))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lxbq))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fbbq)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +200,13 @@ public class MCLaucherXA extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(fbbq))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6))
         );
 
@@ -212,14 +242,6 @@ public class MCLaucherXA extends javax.swing.JFrame {
 
         jPasswordField1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jPasswordField1.setEchoChar('*');
-
-        jButton1.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
-        jButton1.setText("启动");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("微软雅黑", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 51, 51));
@@ -292,26 +314,23 @@ public class MCLaucherXA extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(55, 55, 55)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,39 +338,39 @@ public class MCLaucherXA extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel5)))
-                                .addGap(49, 49, 49))))))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel8)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(jLabel5)))))
+                        .addGap(0, 10, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel8)
-                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(5, 5, 5)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jCheckBox1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -362,6 +381,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        GameInfo.lauchArg = jComboBox1.getSelectedItem().toString();
         // jButton2.setVisible(false);
         if (jList1.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, Lang.getLang("Main_NoselectVersion"), Lang.getLang("Main_NoselectVersionTitle"), JOptionPane.WARNING_MESSAGE);
@@ -436,7 +456,21 @@ public class MCLaucherXA extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        if (evt.getButton() == evt.BUTTON3 && jList1.getSelectedIndex() != -1) {
+        if (jList1.getSelectedIndex() == -1) {
+            return;
+        }
+
+        try {
+            if (MakeCmd.isChanged(new ZipFile(GameInfo.GameDir + tpf + "versions" + tpf + jList1.getSelectedValue().toString() + tpf + jList1.getSelectedValue().toString() + ".jar"))) {
+                jComboBox1.setSelectedItem("-Dfml.ignoreInvalidMinecraftCertificates=true -Dfml.ignorePatchDiscrepancies=true");
+            } else {
+                jComboBox1.setSelectedItem("");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(MCLaucherXA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (evt.getButton() == MouseEvent.BUTTON3 && jList1.getSelectedIndex() != -1) {
             jPopupMenu1.show(this, evt.getX() + 25, evt.getY() + 25);
         }
         if (evt.getButton() == MouseEvent.BUTTON2 && evt.getClickCount() == 2) {
@@ -521,6 +555,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
         jMenuItem4.setText(Lang.getLang("Main_Menu_Update"));
         //  jMenuItem4.setText(Lang.getLang("Main_Menu_Delete"));
         jLabel7.setText(Lang.getLang("Main_Label_Update"));
+        jLabel9.setText(Lang.getLang("Main_Label_AppArgs"));
         try {
             jLabel7.setVisible(Updater.NeedUpdate());
         } catch (JSONException ex) {
@@ -687,6 +722,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
 //  this.setIconImage(this.getToolkit().getImage(getClass().getResource("/icon_16x16.icon")));
         //   System.out.println(p.getProperty("zhengbanmima"));
         jCheckBox1.setSelected(Config.getConfig("iszhengban").equals("true"));
+        jCheckBox1ActionPerformed(null);
         setLocationRelativeTo(getOwner());
         if (!System.getProperty("os.name").contains("Windows")) {
             jLabel8.setText(Lang.getLang("Main_NotWindows"));
@@ -709,9 +745,6 @@ public class MCLaucherXA extends javax.swing.JFrame {
                 jCheckBox1.setSelected(false);
                 jPasswordField1.setEnabled(false);
 
-            } else {
-
-                jCheckBox1.setSelected(true);
             }
             jTextField1.setText(Config.getConfig("username"));
             jTextField2.setText(Config.getConfig("lastmemory"));
@@ -728,6 +761,9 @@ public class MCLaucherXA extends javax.swing.JFrame {
             OutputStream in = new FileOutputStream(GameInfo.Rundir + tpf + "MCXA.cfg");
             Config.Save();
 // p.store(in, "= =");
+            if (MakeCmd.isChanged(new ZipFile(GameInfo.GameDir + tpf + "versions" + tpf + jList1.getSelectedValue().toString() + tpf + jList1.getSelectedValue().toString() + ".jar"))) {
+                jComboBox1.setSelectedIndex(0);
+            }
         } catch (IOException | JSONException e) {
         } catch (Exception ex) {
             Logger.getLogger(MCLaucherXA.class.getName()).log(Level.SEVERE, null, ex);
@@ -757,9 +793,10 @@ public class MCLaucherXA extends javax.swing.JFrame {
         System.out.println(System.getProperty("os.arch"));
         //  System.getProperties().list(System.out);
         try {
-            String tx=new File(".").getCanonicalPath();
-            if(tx.endsWith("\\"))
-                tx=tx.substring(0,tx.length()-1);
+            String tx = new File(".").getCanonicalPath();
+            if (tx.endsWith("\\")) {
+                tx = tx.substring(0, tx.length() - 1);
+            }
             File f2 = new File(tx + "/update.note");
             System.out.println(f2.exists() + f2.toString());
             if (f2.exists()) {
@@ -787,7 +824,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
             //   GameInfoGet.getGameVersions();
             GameInfo.Rundir = new File(".").getCanonicalPath();
             System.out.println(GameInfo.Rundir);
-            if ( GameInfo.Rundir.endsWith("\\")) {
+            if (GameInfo.Rundir.endsWith("\\")) {
                 GameInfo.Rundir = GameInfo.Rundir.substring(0, GameInfo.Rundir.length() - 1);
             }
             System.out.println(GameInfo.Rundir);
@@ -818,9 +855,12 @@ public class MCLaucherXA extends javax.swing.JFrame {
             }
             // getClass().getResource("/sChinese.lang").
 
-            if (!(new File(GameInfo.Rundir + tpf + "MCXA.cfg")).exists()) {
+            if (!(new File(GameInfo.Rundir + tpf + "MCXA.json")).exists()) {
                 System.out.println("未找到配置");
-                new File(GameInfo.Rundir + tpf + "MCXA.cfg").createNewFile();
+                new File(GameInfo.Rundir + tpf + "MCXA.json").createNewFile();
+                FileWriter fw = new FileWriter(GameInfo.Rundir + tpf + "MCXA.json");
+                fw.write("{}");
+                fw.close();
                 //   p.load(new FileInputStream(GameInfo.Rundir + tpf + "MCXA.cfg"));
                 String playerxxx = String.valueOf(new Random().nextInt(999));
                 if (playerxxx.length() != 3) {
@@ -828,7 +868,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
                         playerxxx = "0" + playerxxx;
                     }
                 }
-                Config.Load(new File(GameInfo.Rundir + tpf + "MCXA.cfg"));
+                Config.Load(new File(GameInfo.Rundir + tpf + "MCXA.json"));
                 Config.setConfig("username", "player" + playerxxx);
                 Config.setConfig("lastgameversion", "0");
                 Config.setConfig("lastmemory", "1500");
@@ -845,7 +885,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
                 Config.Save();
 
             } else {
-                Config.Load(new File(GameInfo.Rundir + tpf + "MCXA.cfg"));
+                Config.Load(new File(GameInfo.Rundir + tpf + "MCXA.json"));
             }
             GameInfo.GameDir = Config.getConfig("GameDir");
             GameInfo.JavaPath = Config.getConfig("JavaPath");
@@ -900,6 +940,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
     private javax.swing.JLabel fbbq;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -908,6 +949,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -934,9 +976,11 @@ static String getTpf() {
         }
     }
 
-    void BrushLabels(int index) throws JSONException {
-        lxbq.setText(vs[index].getString("type"));
-        fbbq.setText(vs[index].getString("releaseTime"));
+    void BrushLabels(int index) throws JSONException, IOException {
+        JSONObject jo = new JSONObject(ReadFile(GameInfo.GameDir + tpf + "versions" + tpf + jList1.getSelectedValue().toString() + tpf + jList1.getSelectedValue().toString() + ".json"));
+
+        lxbq.setText(jo.getString("type"));
+        fbbq.setText(jo.getString("releaseTime"));
     }
 
     static String ReadFile(String path) throws FileNotFoundException, IOException {

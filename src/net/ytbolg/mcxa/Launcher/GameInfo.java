@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
  * @author Ytong
  */
 public class GameInfo {
+  public static   String lauchArg="";
     public static boolean deleteDir(File dir) {
         if (dir.isDirectory()) {
             String[] children = dir.list();

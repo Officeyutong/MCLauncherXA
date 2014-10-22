@@ -13,6 +13,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -20,10 +25,8 @@ import java.util.Properties;
  */
 public class Config {
 
-    static ArrayList lvalue;
-    static ArrayList rvalue;
     static File CfgFile;
-    static Properties p = new Properties();
+    static JSONObject p = new JSONObject();
     private static String t = "";
 
     static String getNormalValue(String key) {
@@ -71,58 +74,81 @@ public class Config {
         return t;
     }
 
-    public static void Load(File ConfigFile) throws FileNotFoundException, IOException {
-        lvalue = new ArrayList();
-        rvalue = new ArrayList();
-        //  rvalue = new ArrayList();
+    public static void Load(File ConfigFile) {
+        try {
+            //  rvalue = new ArrayList();
         /*        FileReader fr = new FileReader(LangFile);
-         char ch[] = new char[(int) LangFile.length()];
-         fr.read(ch);*/
-        CfgFile = ConfigFile;
+             char ch[] = new char[(int) LangFile.length()];
+             fr.read(ch);*/
+            if (!ConfigFile.exists()) {
+                ConfigFile.createNewFile();
+            }
+            CfgFile = ConfigFile;
 
-        //"UTF-8"new InputStreamReader(new FileInputStream(LangFile)),"UTF-8")
+            //"UTF-8"new InputStreamReader(new FileInputStream(LangFile)),"UTF-8")
         /*        InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(LangFile),"UTF-8");
-         BufferedInputStream bif=new BufferedInputStream();*/
-        p.load(new FileReader(ConfigFile));
-        System.out.println(ConfigFile);
-        Object o[] = p.stringPropertyNames().toArray();
-        for (Object o1 : o) {
-            lvalue.add(o1.toString());
-            //  System.out.println(o1.toString());
-        }
-        // while()
-        for (int i = 0; i < p.size(); i++) {
-            //  System.out.println(p.get(lvalue.get(i)));
-            rvalue.add(p.get(lvalue.get(i)));
-            //  p.propertyNames().
+             BufferedInputStream bif=new BufferedInputStream();*/
+            p = new JSONObject(ReadFile(ConfigFile.toString()));
+            System.out.println(ConfigFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            /*        try {
+             p = null;
+             ConfigFile.delete();
+             ConfigFile.createNewFile();
+             p = new JSONObject(ReadFile(ConfigFile.toString()));
+             } //  Object o[] = p.stringPropertyNames().toArray();
+             catch (IOException ex) {
+             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (JSONException ex) {
+             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+             }*/
         }
 
     }
 
     public static String getConfig(String key) {
 
-        if (!lvalue.contains(key)) {
+        if (!p.has(key)) {
             setConfig(key, getNormalValue(key));
         }
-        return rvalue.get(lvalue.indexOf(key)).toString();
+        try {
+            return p.getString(key);
+        } catch (JSONException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public static void setConfig(String key, String value) {
-        if (!lvalue.contains(key)) {
-            rvalue.add(value);
-            lvalue.add(key);
-            p.setProperty(key, value);
-        } else {
-            rvalue.set(lvalue.indexOf(key), value);
-            p.setProperty(key, value);
+        try {
+
+            p.put(key, value);
+
+        } catch (JSONException e) {e.printStackTrace();
         }
     }
 
     public static void Save() {
         try {
-            p.store(new FileWriter(CfgFile), "这是MClauncherXA的配置文件");
+            FileWriter fw = new FileWriter(CfgFile);
+            fw.write(p.toString());
+            fw.close();
+//   p.write();
         } catch (IOException ie) {
             ie.printStackTrace();
         }
+    }
+
+    static String ReadFile(String path) throws FileNotFoundException, IOException {
+
+        File file = new File(path);
+        FileReader r = new FileReader(file);
+        char c[] = new char[(int) file.length()];
+        r.read(c);
+        System.out.println(String.valueOf(c));
+        return String.valueOf(c);
     }
 }
