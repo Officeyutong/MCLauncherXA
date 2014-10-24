@@ -556,13 +556,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
         //  jMenuItem4.setText(Lang.getLang("Main_Menu_Delete"));
         jLabel7.setText(Lang.getLang("Main_Label_Update"));
         jLabel9.setText(Lang.getLang("Main_Label_AppArgs"));
-        try {
-            jLabel7.setVisible(Updater.NeedUpdate());
-        } catch (JSONException ex) {
-            Logger.getLogger(MCLaucherXA.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MCLaucherXA.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        jLabel7.setVisible(Updater.NeedUpdate());
         JMenuItem ji = jPopupMenu1.add(Lang.getLang("Main_Menu_Delete"));
         JMenuItem j2 = jPopupMenu1.add(Lang.getLang("Main_Menu_Brush"));
         JMenuItem j3 = jPopupMenu1.add(Lang.getLang("Main_Button_GetAss"));
@@ -758,7 +752,7 @@ public class MCLaucherXA extends javax.swing.JFrame {
             if (jList1.getModel().getSize() != 0) {
                 BrushLabels(jList1.getSelectedIndex());
             }
-            OutputStream in = new FileOutputStream(GameInfo.Rundir + tpf + "MCXA.cfg");
+            //    OutputStream in = new FileOutputStream(GameInfo.Rundir + tpf + "MCXA.cfg");
             Config.Save();
 // p.store(in, "= =");
             if (MakeCmd.isChanged(new ZipFile(GameInfo.GameDir + tpf + "versions" + tpf + jList1.getSelectedValue().toString() + tpf + jList1.getSelectedValue().toString() + ".jar"))) {
@@ -888,6 +882,11 @@ public class MCLaucherXA extends javax.swing.JFrame {
                 Config.Load(new File(GameInfo.Rundir + tpf + "MCXA.json"));
             }
             GameInfo.GameDir = Config.getConfig("GameDir");
+            if (new File(GameInfo.GameDir).exists() == false) {
+                Config.setConfig("GameDir", GameInfo.Rundir + tpf + ".minecraft");
+                GameInfo.GameDir = Config.getConfig("GameDir");
+                Config.Save();
+            }
             GameInfo.JavaPath = Config.getConfig("JavaPath");
             Lang.Load(new File(GameInfo.Rundir + tpf + "MCXA.Lang" + tpf + Config.getConfig("Lang")));
         //到这。。。

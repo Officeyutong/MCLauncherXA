@@ -206,11 +206,18 @@ public class Updater extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
-public static boolean NeedUpdate() throws JSONException, IOException {
+public static boolean NeedUpdate()  {
 
-        JSONObject jo = new JSONObject(downloadFile("http://ytbolg.net/mcxa/update.json"));
-
-        return !LangFile.Version.equals(jo.getString("newVersion"));
+        try {
+            JSONObject jo = new JSONObject(downloadFile("http://ytbolg.net/mcxa/update.json"));
+            
+            return !LangFile.Version.equals(jo.getString("newVersion"));
+        } catch (Exception ex) {
+            
+            Logger.getLogger(Updater.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+       // return false;
     }
 
     public static String downloadFile(String remoteFilePath) throws IOException {
